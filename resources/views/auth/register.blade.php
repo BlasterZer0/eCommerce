@@ -5,9 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="border-radius: 1rem;">
-                <div class="card-header">{{ __('Registro') }}</div>
-
                 <div class="card-body">
+                    <h2 class="fw-bold mb-3 text-uppercase text-center">{{ __('Registro') }}</h2>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
