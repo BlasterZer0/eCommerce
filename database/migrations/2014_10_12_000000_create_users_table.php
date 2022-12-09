@@ -18,9 +18,12 @@ return new class extends Migration
             $table->string('name' , 50);
             $table->string('lastname' , 50);
             $table->string('document' , 15)->unique();
+            $table->string('phone' , 15)->unique();
+            $table->string('address', 255);
             $table->string('email' , 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('rol' , 10);
             $table->rememberToken();
             $table->timestamps();
         });

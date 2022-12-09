@@ -15,6 +15,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <a href="{{ route('user.index')}}">Usuarios</a>
+                    <a href="{{ route('animal.index')}}">Animal</a>
                 </div>
             </div>
         </div>

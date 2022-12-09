@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Animal;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +18,24 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
-});
+    $animals = Animal::orderBy('id', 'asc')->paginate(8);
+    return view('index')->with('animals', $animals);
+})->name('index');
+
+Route::get('/info/{id}', function ($id) {
+    $animal = Animal::findOrFail($id);
+    return view('info')->with('animal', $animal);
+})->name('info');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth' , 'auth.session'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::get('/profile', function () {
+        return view('profile');
+    })->name('profile');
+
+    Route::resource('user', UserController::class);
+    Route::resource('animal', AnimalController::class);
+});
